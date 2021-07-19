@@ -11,7 +11,6 @@ RSpec.describe 'Movies Show Page' do
     @avengers.actors << @downey
     @avengers.actors << @evans
     @avengers.actors << @johansson
-    @avengers.actors << @paltrow
 
     visit "/movies/#{@avengers.id}"
   end
@@ -24,11 +23,18 @@ RSpec.describe 'Movies Show Page' do
 
   it 'lists actors in movie by age' do
     expect(page).to have_css("#actor-#{@johansson.id} ~ #actor-#{@evans.id}")
-    expect(page).to have_css("#actor-#{@evans.id} ~ #actor-#{@paltrow.id}")
-    expect(page).to have_css("#actor-#{@paltrow.id} ~ #actor-#{@downey.id}")
+    expect(page).to have_css("#actor-#{@evans.id} ~ #actor-#{@downey.id}")
   end
 
   it 'shows average age of actors' do
-    expect(page).to have_content('Actors Average Age: 45')
+    expect(page).to have_content('Actors Average Age: 44')
+  end
+
+  it 'can add actor in movie to show page' do
+    fill_in :actor, with: 'Gwyneth Paltrow'
+    click_button 'Add Actor to Movie'
+    save_and_open_page
+
+    expect(page).to have_content(@paltrow.name)
   end
 end
