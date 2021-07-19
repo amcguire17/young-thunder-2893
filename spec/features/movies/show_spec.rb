@@ -31,9 +31,8 @@ RSpec.describe 'Movies Show Page' do
   end
 
   it 'can add actor in movie to show page' do
-    fill_in :actor, with: 'Gwyneth Paltrow'
+    fill_in :actor, with: 'gwyneth'
     click_button 'Add Actor to Movie'
-    save_and_open_page
 
     expect(page).to have_content(@paltrow.name)
   end
