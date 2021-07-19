@@ -24,5 +24,11 @@ RSpec.describe Actor, type: :model do
         expect(Actor.average_age).to eq(48)
       end
     end
+
+    describe '.find_by_name' do
+      it 'can return actor from name' do
+        expect(Actor.find_by_name('Robert')).to eq([@downey])
+      end
+    end
   end
 end

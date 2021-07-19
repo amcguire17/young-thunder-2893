@@ -4,7 +4,7 @@ class MovieActorsController < ApplicationController
   end
   def create
     @movie = Movie.find(params[:id])
-    @actor = Actor.where('name Ilike ?', "%#{params[:actor]}%")
+    @actor = Actor.find_by_name(params[:actor])
     @movie.actors << @actor
     redirect_to "/movies/#{@movie.id}"
   end
